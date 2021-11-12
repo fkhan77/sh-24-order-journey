@@ -16,8 +16,8 @@ Yarn Version: 1.22.15
 
 `yarn dev` - Run the app locally on a dev server at http://localhost:3000
 
-`yarn run test` - Run unit tests
+`yarn test` - Run unit tests
 
 `yarn run storybook` - Run Storybook
 
-`yarn run cypress` - Run cypress
+`yarn cypress:open` - Run cypress
