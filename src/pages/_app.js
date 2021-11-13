@@ -1,16 +1,14 @@
 import GlobalStyle from "../styles/globalStyles";
-import ThemeProvider from "styled-components";
-
-const theme = {
-  main: "#2f2f81",
-  secondary: "#434488",
-};
+import { ThemeProvider } from "styled-components";
+import { theme } from "../styles/theme";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }

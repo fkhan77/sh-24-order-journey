@@ -1,4 +1,7 @@
 export const theme = {
-  main: "#2f2f81",
-  secondary: "#434488",
+  primary: "#2f2f81",
+  secondary: "#FFFFFF",
+  tertiary: "#434488",
+  navigation: "#FFA500",
+  error: "red",
 };
