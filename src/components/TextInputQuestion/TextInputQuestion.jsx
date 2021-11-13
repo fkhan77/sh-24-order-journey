@@ -1,28 +1,23 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { Heading } from "../Heading/Heading";
 
 const QuestionContainer = styled.div`
   padding: 1rem;
   width: 95%;
 `;
-const QuestionTitle = styled.div`
-  font-family: "Playfair Display";
-  font-size: 1.5rem;
-  padding-bottom: 0.5rem;
-`;
 const QuestionLabel = styled.label`
-  padding-top: 0.5rem;
   display: block;
   padding-bottom: 0.5rem;
 `;
 const QuestionInput = styled.input`
-  background-color: #2f2f81;
+  background-color: ${(props) => props.theme.primary};
   outline: none;
-  border: 1px solid white;
+  border: 1px solid ${(props) => props.theme.secondary};
   width: 30%;
   height: 1.5rem;
-  color: white;
-
+  color: ${(props) => props.theme.secondary};
+  padding-left: 1rem;
   /* Large devices (Laptops, 1440px and down) */
   @media only screen and (max-width: 1440px) {
     width: 40%;
@@ -41,7 +36,7 @@ const QuestionInput = styled.input`
 export function TextInputQuestion({ title, label }) {
   return (
     <QuestionContainer>
-      <QuestionTitle>{title}</QuestionTitle>
+      <Heading text={title} />
       {label && <QuestionLabel>{label}</QuestionLabel>}
       <QuestionInput type="text" />
     </QuestionContainer>
@@ -51,9 +46,4 @@ export function TextInputQuestion({ title, label }) {
 TextInputQuestion.propTypes = {
   title: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-};
-
-TextInputQuestion.defaultProps = {
-  title: "title",
-  label: "label",
 };
