@@ -1,37 +1,41 @@
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import styled from "styled-components";
+import { NavigationButton } from "../NavigationButton/NavigationButton";
+import PropTypes from "prop-types";
 
 const NavigationBarContainer = styled.div`
-  color: orange;
   width: 95%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 
-const NavigationIcon = styled.span`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 0.5rem;
-  cursor: pointer;
-  width: 5.5%;
-  user-select: none;
-`;
-
-export function NavigationBar({ handleBack, handleNext, isLastStep }) {
+export function NavigationBar({
+  handleBack,
+  handleNext,
+  isFirstStep,
+  isLastStep,
+}) {
   return (
-    <NavigationBarContainer>
-      <NavigationIcon onClick={() => handleBack()}>
-        <ArrowBackIosIcon sx={{ fontSize: `0.8rem` }} /> Back
-      </NavigationIcon>
-      {!isLastStep && (
-        <NavigationIcon onClick={() => handleNext()}>
-          Next <ArrowForwardIosIcon sx={{ fontSize: `0.8rem` }} />
-        </NavigationIcon>
-      )}
-    </NavigationBarContainer>
+    <>
+      <NavigationBarContainer>
+        {!isFirstStep ? (
+          <NavigationButton onClick={handleBack} isNext={false} />
+        ) : (
+          <div></div>
+        )}
+        {!isLastStep ? (
+          <NavigationButton onClick={handleNext} isNext={true} />
+        ) : (
+          <div></div>
+        )}
+      </NavigationBarContainer>
+    </>
   );
 }
+
+NavigationBar.propTypes = {
+  handleBack: PropTypes.func,
+  handleNext: PropTypes.func,
+  isFirstStep: PropTypes.bool,
+  isLastStep: PropTypes.bool,
+};
