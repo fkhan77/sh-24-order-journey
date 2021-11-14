@@ -18,7 +18,7 @@ const StyledChip = styled.div`
 
 export function SelectionChip({ text, selected, handleClick }) {
   return (
-    <StyledChip selected={selected} onClick={handleClick}>
+    <StyledChip role="radio" selected={selected} onClick={handleClick}>
       {text}
     </StyledChip>
   );

@@ -6,10 +6,11 @@ const StyledLabel = styled.label`
   margin-bottom: 0.5rem;
 `;
 
-export function Label({ text }) {
-  return <StyledLabel>{text}</StyledLabel>;
+export function Label({ text, id }) {
+  return <StyledLabel htmlFor={id}>{text}</StyledLabel>;
 }
 
 Label.propTypes = {
   text: PropTypes.string.isRequired,
+  for: PropTypes.string,
 };

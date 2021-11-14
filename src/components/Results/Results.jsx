@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Heading } from "../Heading/Heading";
-import { ContactSupport } from "@mui/icons-material";
 
 const ResultsContainer = styled.div`
   background-color: ${(props) => props.theme.primary};
@@ -18,11 +17,14 @@ const Result = styled.div`
 export function Results({ results }) {
   return (
     <>
-      <ResultsContainer>
+      <ResultsContainer data-testid="result-container">
         <Heading text="Results" />
         {results.map((result) => {
           return (
-            <Result key={result[0]}>{`${result[0]}: ${result[1]}`}</Result>
+            <Result
+              data-testid="result"
+              key={result[0]}
+            >{`${result[0]}: ${result[1]}`}</Result>
           );
         })}
       </ResultsContainer>

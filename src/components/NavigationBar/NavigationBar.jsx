@@ -17,24 +17,22 @@ export function NavigationBar({
   isError,
 }) {
   return (
-    <>
-      <NavigationBarContainer>
-        {!isFirstStep ? (
-          <NavigationButton onClick={handleBack} isNext={false} />
-        ) : (
-          <div></div>
-        )}
-        {!isLastStep ? (
-          <NavigationButton
-            onClick={handleNext}
-            isNext={true}
-            isError={isError}
-          />
-        ) : (
-          <div></div>
-        )}
-      </NavigationBarContainer>
-    </>
+    <NavigationBarContainer data-testid="navigation-bar">
+      {!isFirstStep ? (
+        <NavigationButton handleClick={handleBack} isNext={false} />
+      ) : (
+        <div></div>
+      )}
+      {!isLastStep ? (
+        <NavigationButton
+          handleClick={handleNext}
+          isNext={true}
+          isError={isError}
+        />
+      ) : (
+        <div></div>
+      )}
+    </NavigationBarContainer>
   );
 }
 

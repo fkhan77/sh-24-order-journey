@@ -133,7 +133,7 @@ export default function Home() {
                     options={["STI Testing", "Contraception", "Other"]}
                     key="ServicesQuestion"
                   />,
-                  // <Results results={Object.entries(values)} key="Results" />,
+                  <Results results={Object.entries(values)} key="Results" />,
                 ][step]
               }
               <NavigationBar

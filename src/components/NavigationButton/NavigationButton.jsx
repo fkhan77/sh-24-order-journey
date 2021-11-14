@@ -19,9 +19,13 @@ const StyledNavigationButton = styled.span`
   }
 `;
 
-export function NavigationButton({ onClick, isNext, isError }) {
+export function NavigationButton({ handleClick, isNext, isError }) {
   return (
-    <StyledNavigationButton onClick={onClick} isError={isError}>
+    <StyledNavigationButton
+      role="button"
+      onClick={handleClick}
+      isError={isError}
+    >
       {isNext ? (
         <>
           Next{" "}

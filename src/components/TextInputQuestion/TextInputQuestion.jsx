@@ -46,17 +46,20 @@ export function TextInputQuestion({
 }) {
   return (
     <QuestionContainer>
-      <Heading text={title} isError={isError} />
-      {label && <Label text={label} />}
+      <Heading text={title} />
+      <Label text={label} id={id} />
       <QuestionInput
         type="text"
+        data-testid="text-input"
         id={id}
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
         isError={isError}
       />
-      {isError && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {isError && (
+        <ErrorMessage data-testid="error">{errorMessage}</ErrorMessage>
+      )}
     </QuestionContainer>
   );
 }
