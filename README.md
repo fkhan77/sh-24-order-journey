@@ -22,4 +22,12 @@ Yarn Version: 1.22.15
 
 `yarn test` - Run unit tests
 
-`yarn cypress:open` - Run cypress
+`yarn cypress:open` - Run Cypress
+
+Note: In order for Cypress to run properly when using Next, a production version of the application needs to be built and run before running Cypress. Use the following steps to run Cypress correctly.
+
+1. `yarn build`
+
+2. `yarn start`
+
+3. In another terminal window run `yarn cypress:open`

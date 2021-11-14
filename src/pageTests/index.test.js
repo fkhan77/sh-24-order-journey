@@ -1,8 +1,7 @@
 import React from "react";
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Home from "./index";
-import { act } from "react-dom/test-utils";
+import Home from "../pages/index";
 
 test("First question should appear by default", () => {
   render(<Home />);
