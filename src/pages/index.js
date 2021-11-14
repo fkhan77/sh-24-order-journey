@@ -39,30 +39,7 @@ const HomeContainer = styled.div`
 
 export default function Home() {
   const [step, setStep] = useState(0);
-  const sections = [
-    <TextInputQuestion
-      title="What is your name?"
-      label="Name"
-      key="NameQuestion"
-    />,
-    <TextInputQuestion
-      title="What is your email address?"
-      label="Email address"
-      key="EmailQuestion"
-    />,
-    <MultiOptionQuestion
-      title="What service are you here for?"
-      options={["STI Testing", "Contraception", "Other"]}
-      key="ServicesQuestion"
-    />,
-    <Results
-      results={[
-        { question: "Sample Question", answer: "Sample Answer" },
-        { question: "Sample Question 2", answer: "Sample Answer 2" },
-      ]}
-      key="Results"
-    />,
-  ];
+  const sections = 3;
 
   const handleBack = () => {
     setStep(step - 1);
@@ -87,6 +64,9 @@ export default function Home() {
           email: Yup.string()
             .email("You must enter a valid email address to continue")
             .required("You must enter an email address to continue"),
+          service: Yup.string()
+            .oneOf(["STI Testing", "Contraception", "Other"])
+            .required("You must select an option to continue"),
         })}
       >
         {(props) => {
@@ -94,61 +74,90 @@ export default function Home() {
             values,
             touched,
             errors,
-            dirty,
-            isSubmitting,
             handleChange,
             handleBlur,
-            handleSubmit,
-            handleReset,
-            validateForm,
+            setFieldValue,
           } = props;
           return (
             <HomeContainer>
               {
                 [
-                  <TextInputQuestion
-                    title="What is your name?"
-                    label="Name"
-                    id="name"
-                    value={values.name}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    isError={errors.name && touched.name}
-                    errorMessage={errors.name}
-                    key="NameQuestion"
-                  />,
-                  <TextInputQuestion
-                    title="What is your email address?"
-                    label="Email address"
-                    id="email"
-                    value={values.email}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    isError={errors.email && touched.email}
-                    errorMessage={errors.email}
-                    key="EmailQuestion"
-                  />,
-                  <MultiOptionQuestion
-                    title="What service are you here for?"
-                    options={["STI Testing", "Contraception", "Other"]}
-                    key="ServicesQuestion"
-                  />,
-                  <Results results={Object.entries(values)} key="Results" />,
+                  <>
+                    <TextInputQuestion
+                      title="What is your name?"
+                      label="Name"
+                      key="NameQuestion"
+                      id="name"
+                      value={values.name}
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      isError={errors.name && touched.name}
+                      errorMessage={errors.name}
+                    />
+                    <NavigationBar
+                      handleBack={handleBack}
+                      handleNext={handleNext}
+                      isFirstStep={step === 0}
+                      isLastStep={step === sections}
+                      isError={
+                        (errors.name && touched.name) || values.name === ""
+                      }
+                    />
+                  </>,
+                  <>
+                    <TextInputQuestion
+                      title="What is your email address?"
+                      label="Email address"
+                      key="EmailQuestion"
+                      id="email"
+                      value={values.email}
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      isError={errors.email && touched.email}
+                      errorMessage={errors.email}
+                    />
+                    <NavigationBar
+                      handleBack={handleBack}
+                      handleNext={handleNext}
+                      isFirstStep={step === 0}
+                      isLastStep={step === sections}
+                      isError={
+                        (errors.email && touched.email) || values.email === ""
+                      }
+                    />
+                  </>,
+                  <>
+                    <MultiOptionQuestion
+                      title="What service are you here for?"
+                      key="ServicesQuestion"
+                      options={["STI Testing", "Contraception", "Other"]}
+                      id="service"
+                      value={values.service}
+                      handleClick={setFieldValue}
+                    />
+                    <NavigationBar
+                      handleBack={handleBack}
+                      handleNext={handleNext}
+                      isFirstStep={step === 0}
+                      isLastStep={step === sections}
+                      isError={
+                        (errors.service && touched.service) ||
+                        values.service === ""
+                      }
+                    />
+                  </>,
+                  <>
+                    <Results results={Object.entries(values)} key="Results" />
+                    <NavigationBar
+                      handleBack={handleBack}
+                      handleNext={handleNext}
+                      isFirstStep={step === 0}
+                      isLastStep={step === sections}
+                      isError={false}
+                    />
+                  </>,
                 ][step]
               }
-              <NavigationBar
-                handleBack={handleBack}
-                // handleNext={() =>
-                //   validateForm().then((errors) => {
-                //     console.log("errors", errors);
-                //     errors.length === 0 ? handleNext() : null;
-                //   })
-                // }
-                handleNext={handleNext}
-                isFirstStep={step === 0}
-                isLastStep={step === sections.length - 1}
-                isError={Object.keys(errors).length >= 1}
-              />
             </HomeContainer>
           );
         }}
