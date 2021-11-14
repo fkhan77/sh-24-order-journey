@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { SelectionChip } from "../SelectionChip/SelectionChip";
 import { Heading } from "../Heading/Heading";
 import PropTypes from "prop-types";
@@ -16,12 +17,20 @@ const SelectionChipContainer = styled.div`
 `;
 
 export function MultiOptionQuestion({ title, options }) {
+  const [selected, setSelected] = useState("");
   return (
     <QuestionContainer>
       <Heading text={title} />
       <SelectionChipContainer>
         {options.map((option) => {
-          return <SelectionChip key={option} text={option} />;
+          return (
+            <SelectionChip
+              key={option}
+              text={option}
+              selected={selected === option}
+              handleClick={() => setSelected(option)}
+            />
+          );
         })}
       </SelectionChipContainer>
     </QuestionContainer>

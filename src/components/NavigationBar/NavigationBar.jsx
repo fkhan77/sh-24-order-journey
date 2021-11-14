@@ -14,6 +14,7 @@ export function NavigationBar({
   handleNext,
   isFirstStep,
   isLastStep,
+  isError,
 }) {
   return (
     <>
@@ -24,7 +25,11 @@ export function NavigationBar({
           <div></div>
         )}
         {!isLastStep ? (
-          <NavigationButton onClick={handleNext} isNext={true} />
+          <NavigationButton
+            onClick={handleNext}
+            isNext={true}
+            isError={isError}
+          />
         ) : (
           <div></div>
         )}

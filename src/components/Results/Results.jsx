@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Heading } from "../Heading/Heading";
+import { ContactSupport } from "@mui/icons-material";
 
 const ResultsContainer = styled.div`
   background-color: ${(props) => props.theme.primary};
@@ -21,9 +22,7 @@ export function Results({ results }) {
         <Heading text="Results" />
         {results.map((result) => {
           return (
-            <Result
-              key={result.question}
-            >{`${result.question}: ${result.answer}`}</Result>
+            <Result key={result[0]}>{`${result[0]}: ${result[1]}`}</Result>
           );
         })}
       </ResultsContainer>
@@ -33,9 +32,6 @@ export function Results({ results }) {
 
 Results.propTypes = {
   results: PropTypes.arrayOf(
-    PropTypes.shape({
-      question: PropTypes.string.isRequired,
-      answer: PropTypes.any.isRequired,
-    })
-  ),
+    PropTypes.arrayOf(PropTypes.string, PropTypes.string)
+  ).isRequired,
 };

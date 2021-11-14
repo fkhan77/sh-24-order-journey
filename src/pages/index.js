@@ -2,16 +2,16 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Head from "next/head";
 import {
   TextInputQuestion,
   NavigationBar,
   MultiOptionQuestion,
   Results,
 } from "../components";
+import Head from "next/head";
 
 const HomeContainer = styled.div`
-  height: 12rem;
+  min-height: 12rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -77,15 +77,82 @@ export default function Home() {
         <title>SH-24 Order Journey</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <HomeContainer>
-        {sections[step]}
-        <NavigationBar
-          handleBack={handleBack}
-          handleNext={handleNext}
-          isFirstStep={step === 0}
-          isLastStep={step === sections.length - 1}
-        />
-      </HomeContainer>
+      <Formik
+        initialValues={{ name: "", email: "", service: "" }}
+        validationSchema={Yup.object().shape({
+          name: Yup.string()
+            .min(2, "Name must be between 2 and 25 characters")
+            .max(25, "Name must be between 2 and 25 characters")
+            .required("You must enter a name to continue"),
+          email: Yup.string()
+            .email("You must enter a valid email address to continue")
+            .required("You must enter an email address to continue"),
+        })}
+      >
+        {(props) => {
+          const {
+            values,
+            touched,
+            errors,
+            dirty,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            handleReset,
+            validateForm,
+          } = props;
+          return (
+            <HomeContainer>
+              {
+                [
+                  <TextInputQuestion
+                    title="What is your name?"
+                    label="Name"
+                    id="name"
+                    value={values.name}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    isError={errors.name && touched.name}
+                    errorMessage={errors.name}
+                    key="NameQuestion"
+                  />,
+                  <TextInputQuestion
+                    title="What is your email address?"
+                    label="Email address"
+                    id="email"
+                    value={values.email}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    isError={errors.email && touched.email}
+                    errorMessage={errors.email}
+                    key="EmailQuestion"
+                  />,
+                  <MultiOptionQuestion
+                    title="What service are you here for?"
+                    options={["STI Testing", "Contraception", "Other"]}
+                    key="ServicesQuestion"
+                  />,
+                  // <Results results={Object.entries(values)} key="Results" />,
+                ][step]
+              }
+              <NavigationBar
+                handleBack={handleBack}
+                // handleNext={() =>
+                //   validateForm().then((errors) => {
+                //     console.log("errors", errors);
+                //     errors.length === 0 ? handleNext() : null;
+                //   })
+                // }
+                handleNext={handleNext}
+                isFirstStep={step === 0}
+                isLastStep={step === sections.length - 1}
+                isError={Object.keys(errors).length >= 1}
+              />
+            </HomeContainer>
+          );
+        }}
+      </Formik>
     </div>
   );
 }

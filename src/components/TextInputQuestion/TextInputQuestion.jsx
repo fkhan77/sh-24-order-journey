@@ -1,23 +1,21 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Heading } from "../Heading/Heading";
+import { Heading, Label } from "../";
 
 const QuestionContainer = styled.div`
-  padding: 1rem;
+  margin: 1rem;
   width: 95%;
-`;
-const QuestionLabel = styled.label`
-  display: block;
-  padding-bottom: 0.5rem;
 `;
 const QuestionInput = styled.input`
   background-color: ${(props) => props.theme.primary};
   outline: none;
-  border: 1px solid ${(props) => props.theme.secondary};
+  border: 1px solid
+    ${(props) => (props.isError ? props.theme.error : props.theme.secondary)};
   width: 30%;
   height: 1.5rem;
   color: ${(props) => props.theme.secondary};
   padding-left: 1rem;
+  margin-bottom: 0.5rem;
   /* Large devices (Laptops, 1440px and down) */
   @media only screen and (max-width: 1440px) {
     width: 40%;
@@ -32,13 +30,33 @@ const QuestionInput = styled.input`
     width: 60%;
   }
 `;
+const ErrorMessage = styled.div`
+  color: ${(props) => props.theme.error};
+`;
 
-export function TextInputQuestion({ title, label }) {
+export function TextInputQuestion({
+  title,
+  label,
+  id,
+  value,
+  handleChange,
+  handleBlur,
+  isError,
+  errorMessage,
+}) {
   return (
     <QuestionContainer>
-      <Heading text={title} />
-      {label && <QuestionLabel>{label}</QuestionLabel>}
-      <QuestionInput type="text" />
+      <Heading text={title} isError={isError} />
+      {label && <Label text={label} />}
+      <QuestionInput
+        type="text"
+        id={id}
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        isError={isError}
+      />
+      {isError && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </QuestionContainer>
   );
 }
