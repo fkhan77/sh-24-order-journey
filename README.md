@@ -1,6 +1,10 @@
 ## Description
 
-A mini order journey created using Next.js
+A mini order journey created using Next.js, StyledComponents and Formik.
+
+Formatting and pre-commit formatting achieved using Prettier, Husky and lint-staged.
+
+Tested using Jest, react-testing-library and Cypress
 
 ## Prerequisites
 
@@ -17,7 +21,5 @@ Yarn Version: 1.22.15
 `yarn dev` - Run the app locally on a dev server at http://localhost:3000
 
 `yarn test` - Run unit tests
-
-`yarn run storybook` - Run Storybook
 
 `yarn cypress:open` - Run cypress
