@@ -8,7 +8,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "cypress:open": "yarn cypress open",
-    "test": "yarn jest --watch"
+    "test": "yarn jest --watch --verbose --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
