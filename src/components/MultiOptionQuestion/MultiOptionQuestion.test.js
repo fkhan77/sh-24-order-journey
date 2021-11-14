@@ -48,6 +48,7 @@ test("First option should still display correctly after being clicked", () => {
     <MultiOptionQuestion
       title="My Heading Text"
       options={["option 1", "option 2"]}
+      handleClick={jest.fn()}
     />
   );
   userEvent.click(screen.getByText("option 1"));

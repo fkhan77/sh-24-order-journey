@@ -16,8 +16,14 @@ const SelectionChipContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export function MultiOptionQuestion({ title, options }) {
-  const [selected, setSelected] = useState("");
+export function MultiOptionQuestion({
+  title,
+  options,
+  handleClick,
+  id,
+  value,
+}) {
+  const [selected, setSelected] = useState(value);
   return (
     <QuestionContainer>
       <Heading text={title} />
@@ -28,7 +34,10 @@ export function MultiOptionQuestion({ title, options }) {
               key={option}
               text={option}
               selected={selected === option}
-              handleClick={() => setSelected(option)}
+              handleClick={() => {
+                handleClick(id, option);
+                setSelected(option);
+              }}
             />
           );
         })}
@@ -40,4 +49,7 @@ export function MultiOptionQuestion({ title, options }) {
 MultiOptionQuestion.propTypes = {
   title: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleClick: PropTypes.func,
+  id: PropTypes.string,
+  value: PropTypes.string,
 };

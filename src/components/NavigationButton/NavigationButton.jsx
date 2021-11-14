@@ -44,7 +44,7 @@ export function NavigationButton({ handleClick, isNext, isError }) {
 }
 
 NavigationButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
   isNext: PropTypes.bool.isRequired,
+  onClick: PropTypes.func,
   isError: PropTypes.bool,
 };
