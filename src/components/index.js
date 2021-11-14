@@ -1,4 +1,5 @@
 import { Heading } from "./Heading/Heading";
+import { Label } from "./Label/Label";
 import { MultiOptionQuestion } from "./MultiOptionQuestion/MultiOptionQuestion";
 import { NavigationBar } from "./NavigationBar/NavigationBar";
 import { NavigationButton } from "./NavigationButton/NavigationButton";
@@ -8,6 +9,7 @@ import { TextInputQuestion } from "./TextInputQuestion/TextInputQuestion";
 
 export {
   Heading,
+  Label,
   MultiOptionQuestion,
   NavigationBar,
   NavigationButton,
