@@ -10,9 +10,9 @@ Tested using Jest, react-testing-library and Cypress
 
 You will need the following installed globally on your machine
 
-Node Version: 16.13.0
+Node Version: 16.13.0 https://nodejs.org/en/download/
 
-Yarn Version: 1.22.15
+Yarn Version: 1.22.15 https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable
 
 ## Installation and Usage
 
