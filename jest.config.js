@@ -1,6 +1,7 @@
 module.exports = {
   collectCoverageFrom: [
     "src/components/**/*.{js,jsx,ts,tsx}",
+    "src/pageTests/**/*.{js,jsx,ts,tsx}",
     "!src/page/_app.js",
     "!src/styles",
     "!**/*.d.ts",
